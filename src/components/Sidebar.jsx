@@ -1,0 +1,152 @@
+import React from "react";
+import { useState } from "react";
+import { HiBars3BottomRight } from "react-icons/hi2";
+import { AiFillHome } from "react-icons/ai";
+import { BiSolidBookAdd } from "react-icons/bi";
+import { ImBooks } from "react-icons/im";
+import { FaBookBookmark } from "react-icons/fa6";
+import { BiSolidLogIn, BiSolidLogOut } from "react-icons/bi";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+
+const Sidebar = () => {
+  const [sideBarStatus, setSideBarStatus] = useState(false);
+  const animProp = "transition-all duration-100 ease-in-out";
+
+  const navItems = [
+    {
+      text: "Home",
+      path: "/",
+      icon: <AiFillHome className="text-2xl flex-shrink-0" />,
+    },
+    {
+      text: "All Books",
+      path: "/",
+      icon: <ImBooks className="text-2xl flex-shrink-0" />,
+    },
+    {
+      text: "Borrowed Books",
+      path: "/",
+      icon: <FaBookBookmark className="text-2xl flex-shrink-0" />,
+    },
+    {
+      text: "Add Books",
+      path: "/",
+      icon: <BiSolidBookAdd className="text-2xl flex-shrink-0" />,
+    },
+  ];
+  const loginLogoutItem = [
+    {
+      text: "Login",
+      path: "/",
+      icon: <BiSolidLogIn className="text-2xl flex-shrink-0" />,
+    },
+    {
+      text: "Logout",
+      path: "/",
+      icon: <BiSolidLogOut className="text-2xl flex-shrink-0" />,
+    },
+  ];
+
+  const animationSidebarVariants = {
+    collapsed: {
+      width: "80px",
+    },
+    expended: {
+      width: "300px",
+    },
+  };
+  const animatSidebarTextVarients = {
+    collapsed: {
+      display: "none",
+      width: "0",
+    },
+    expended: {
+      display: "block",
+      width: "100%",
+    },
+  };
+
+  return (
+    <motion.div
+      className={`bg-zinc-900 h-screen p-3 select-none flex flex-col justify-between items-center gap-5 overflow-hidden ${animProp}`}
+      initial={sideBarStatus ? "expended" : "collapsed"}
+      animate={sideBarStatus ? "expended" : "collapsed"}
+      variants={animationSidebarVariants}
+    >
+      <div className="w-full flex flex-col gap-8">
+        <motion.div
+          className={`w-full flex ${
+            sideBarStatus ? "flex-row" : "flex-col-reverse"
+          } justify-between items-center gap-3`}
+        >
+          <div className="flex justify-start items-center gap-3 cursor-pointer overflow-hidden">
+            <span className="w-10 h-10 grid place-items-center bg-white rounded-full text-2xl font-bold flex-shrink-0">
+              EL
+            </span>
+            <motion.span
+              initial={sideBarStatus ? "expended" : "collapsed"}
+              animate={sideBarStatus ? "expended" : "collapsed"}
+              variants={animatSidebarTextVarients}
+              className="text-white text-xl font-semibold overflow-hidden"
+            >
+              ELibrary
+            </motion.span>
+          </div>
+          <HiBars3BottomRight
+            className="text-white text-4xl cursor-pointer"
+            onClick={() => {
+              setSideBarStatus((prev) => !prev);
+            }}
+          />
+        </motion.div>
+        <ul className="w-full flex flex-col gap-2 list-none">
+          {navItems.map(({ text, icon, path }) => (
+            <li className="w-full" key={text}>
+              <Link
+                to={path}
+                className={`w-full flex items-center gap-3 ${
+                  sideBarStatus ? "justify-start" : "justify-center"
+                } bg-white/5 hover:bg-white/20 ${animProp} p-2 rounded-lg text-white overflow-hidden`}
+              >
+                {icon}
+                {sideBarStatus && <span className="whitespace-nowrap">{text}</span>}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <ul className="w-full flex flex-col gap-2 list-none">
+        {loginLogoutItem.map(({ text, icon, path }) => (
+          <li className="w-full" key={text}>
+            <Link
+              to={path}
+              className={`w-full flex items-center gap-3 ${
+                sideBarStatus ? "justify-start" : "justify-center"
+              } bg-white/5 hover:bg-white/20 ${animProp} p-2 rounded-lg text-white overflow-hidden`}
+            >
+              {icon} {sideBarStatus && <span className="whitespace-nowrap">{text}</span>}
+            </Link>
+          </li>
+        ))}
+        <li className="w-full" title="profile">
+          <Link
+            to="/"
+            className={`w-full flex items-center gap-2 ${
+              sideBarStatus ? "justify-start" : "justify-center"
+            } bg-white/5 hover:bg-white/20 ${animProp} p-2 rounded-lg text-white overflow-hidden`}
+          >
+            <img
+              src="https://i.ibb.co/3YLrwzH/Photography-and-Videography-Services.jpg"
+              alt=""
+              className="max-w-[40px] max-h-[40px] w-full h-full aspect-square rounded-full object-cover flex-shrink-0"
+            />
+            {sideBarStatus && <span className="whitespace-nowrap">abc@gmail.com</span>}
+          </Link>
+        </li>
+      </ul>
+    </motion.div>
+  );
+};
+
+export default Sidebar;
