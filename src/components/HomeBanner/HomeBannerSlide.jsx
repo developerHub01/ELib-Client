@@ -9,16 +9,18 @@ const HomeBannerSlide = ({ heading, description, bgLink }) => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="w-full max-w-xl text-left relative z-2010 text-white">
-        <h2
-          className="text-3xl md:text-6xl font-black text-transparent uppercase pb-4 w-full"
-          style={{
-            WebkitTextStroke: "2px #fff",
-          }}
-        >
-          {heading}
-        </h2>
-        <p className="text-slate-50 w-full text-base">{description}</p>
+      <div className="w-[90%] max-w-6xl mx-auto">
+        <div className="w-full max-w-xl text-left relative z-2010 text-white">
+          <h2
+            className="text-3xl md:text-6xl font-black text-transparent uppercase pb-4 w-full"
+            style={{
+              WebkitTextStroke: "2px #fff",
+            }}
+          >
+            {heading}
+          </h2>
+          <p className="text-slate-50 w-full text-base">{description}</p>
+        </div>
       </div>
     </div>
   );

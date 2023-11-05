@@ -6,11 +6,10 @@ import { BiSolidBookAdd } from "react-icons/bi";
 import { ImBooks } from "react-icons/im";
 import { FaBookBookmark } from "react-icons/fa6";
 import { BiSolidLogIn, BiSolidLogOut } from "react-icons/bi";
-import { BsFillMoonFill, BsSunFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import ThemeCompo from "./ThemeCompo";
 
 const Sidebar = () => {
-  const [themeModeStatus, setThemeModeStatus] = useState(false);
   const [sideBarStatus, setSideBarStatus] = useState(false);
   const animProp = "transition-all duration-100 ease-in-out";
 
@@ -142,13 +141,7 @@ const Sidebar = () => {
           </Link>
         </li>
         <li>
-          <button
-            onClick={() => setThemeModeStatus((prev) => !prev)}
-            className={`w-full flex items-center gap-2
-             justify-center bg-white/5 hover:bg-white/20 ${animProp} p-2 rounded-lg text-white overflow-hidden text-2xl`}
-          >
-            {themeModeStatus ? <BsSunFill /> : <BsFillMoonFill />}
-          </button>
+          <ThemeCompo />
         </li>
       </ul>
     </div>

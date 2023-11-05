@@ -4,7 +4,7 @@ import Footer from "./components/Footer";
 
 function App() {
   return (
-    <section className="flex h-screen">
+    <section className="w-full flex h-screen">
       <Sidebar />
       <section className="w-full overflow-y-auto">
         <Outlet />

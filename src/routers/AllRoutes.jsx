@@ -4,6 +4,7 @@ import App from "../App";
 import ErrorPage from "../pages/ErrorPage";
 import Home from "../pages/Home";
 import BookDetails from "../pages/BookDetails";
+import CategoryPage from "../pages/CategoryPage";
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/category/:id",
+        element: <CategoryPage />,
       },
       {
         path: "/details",

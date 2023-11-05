@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import 'swiper/css/effect-fade';
 import "./HomeBanner.css";
 import HomeBannerSlide from "./HomeBannerSlide";
 
@@ -25,19 +26,20 @@ const bannerSlideContent = [
   },
 ];
 
-import { Autoplay } from "swiper/modules";
+import { A11y, Autoplay, EffectFade } from "swiper/modules";
 
 const HomeBanner = () => {
   return (
-    <>
+    <section>
       <Swiper
         className="mySwiper"
         autoplay={{
           delay: 2500,
           disableOnInteraction: false,
         }}
+        effect={'fade'}
         loop={true}
-        modules={[Autoplay]}
+        modules={[EffectFade, Autoplay, A11y]}
       >
         {bannerSlideContent.map((item) => (
           <SwiperSlide key={item.id}>
@@ -45,7 +47,7 @@ const HomeBanner = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-    </>
+    </section>
   );
 };
 
