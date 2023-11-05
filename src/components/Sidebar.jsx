@@ -53,7 +53,7 @@ const Sidebar = () => {
     <div
       className={`${
         sideBarStatus ? "w-[80px] md:w-[300px]" : "md:w-[80px]"
-      } bg-gray-950 h-screen p-3 select-none flex flex-col justify-between items-center gap-5 overflow-hidden ${animProp} relative z-20 shadow-2xl shadow-black/80`}
+      } bg-gray-950 h-screen p-2 select-none flex flex-col justify-between items-center gap-5 overflow-hidden ${animProp} relative z-20 shadow-2xl shadow-black/80`}
     >
       <div className="w-full flex flex-col gap-8">
         <div
