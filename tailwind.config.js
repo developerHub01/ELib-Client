@@ -5,6 +5,7 @@ export default {
   theme: {
     fontFamily: {
       headingFont: ["Montserrat Subrayada", "sans-serif"],
+      signFont: ["Dancing Script", "cursive"],
     },
     extend: {},
   },
