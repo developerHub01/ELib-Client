@@ -78,7 +78,17 @@ const Sidebar = () => {
               setSideBarStatus((prev) => !prev);
             }}
           >
-            {sideBarStatus ? <HiBars3BottomRight /> : <HiBars3 />}
+            {sideBarStatus ? (
+              <>
+                <HiBars3BottomRight className="hidden md:block" />
+                <HiBars3 className="block md:hidden" />
+              </>
+            ) : (
+              <>
+                <HiBars3BottomRight className="hidden" />
+                <HiBars3 className="block" />
+              </>
+            )}
           </span>
         </div>
         <ul className="w-full flex flex-col gap-2 list-none">
@@ -126,7 +136,7 @@ const Sidebar = () => {
         <li className="w-full" title="profile">
           <Link
             to="/"
-            className={`w-full flex items-center gap-2 ${
+            className={`w-full flex items-center gap-3 ${
               sideBarStatus ? "justify-start" : "justify-center"
             } bg-white/5 hover:bg-white/20 ${animProp} p-2 rounded-lg text-white overflow-hidden`}
           >
@@ -136,7 +146,7 @@ const Sidebar = () => {
               className="max-w-[40px] max-h-[40px] w-full h-full aspect-square rounded-full object-cover flex-shrink-0"
             />
             {sideBarStatus && (
-              <span className="whitespace-nowrap">abc@gmail.com</span>
+              <span className="text-sm">abc@gmail.com</span>
             )}
           </Link>
         </li>

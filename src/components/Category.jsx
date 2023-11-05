@@ -14,7 +14,7 @@ const Category = ({ id, name, imgLink }) => {
         <img src={imgLink} alt={name} className="w-full h-full object-cover" />
       </div>
       <div className="flex justify-between items-center gap-2 text-white">
-        <h3 className="text-2xl font-semibold">{name}</h3>
+        <h3 className="text-xl sm:text-2xl font-semibold">{name}</h3>
         <button
           className={`text-2xl aspect-square bg-white/5 p-2 rounded-full group-hover:bg-white/20 ${animProp}`}
         >

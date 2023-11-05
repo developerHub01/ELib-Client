@@ -12,7 +12,7 @@ const HomeBannerSlide = ({ heading, description, bgLink }) => {
       <div className="w-[90%] max-w-6xl mx-auto">
         <div className="w-full max-w-xl text-left relative z-2010 text-white">
           <h2
-            className="text-3xl md:text-6xl font-black text-transparent uppercase pb-4 w-full"
+            className="sm:text-3xl md:text-6xl font-black text-transparent uppercase pb-4 w-full font-headingFont"
             style={{
               WebkitTextStroke: "2px #fff",
             }}

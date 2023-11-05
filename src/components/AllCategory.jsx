@@ -28,7 +28,7 @@ const AllCategory = () => {
   return (
     <section className="bg-white dark:bg-gray-900 py-12">
       <div className="w-[90%] max-w-6xl mx-auto flex flex-col gap-5">
-        <h2 className="text-center text-3xl font-bold text-gray-950 dark:text-white capitalize pb-5">
+        <h2 className="text-center text-2xl sm:text-4xl font-bold text-gray-950 dark:text-white capitalize pb-5 font-headingFont">
           All Category of Books
         </h2>
         <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
