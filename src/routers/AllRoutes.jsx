@@ -8,6 +8,9 @@ import CategoryPage from "../pages/CategoryPage";
 import LoginPage from "../pages/LoginPage";
 import SignUpPage from "../pages/SignUpPage";
 import AddBookPage from "../pages/AddBookPage";
+import BorrowedBooks from "../pages/BorrowedBooks";
+import AllBooks from "../pages/AllBooks";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -29,15 +32,31 @@ const router = createBrowserRouter([
       },
       {
         path: "/addbook",
-        element: <AddBookPage />,
+        element: (
+          <PrivateRoute>
+            <AddBookPage />,
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/allbooks",
+        element: <AllBooks />,
       },
       {
         path: "/category/:id",
         element: <CategoryPage />,
       },
       {
-        path: "/details",
+        path: "/details/:id",
         element: <BookDetails />,
+      },
+      {
+        path: "/borrowed",
+        element: (
+          <PrivateRoute>
+            <BorrowedBooks />,
+          </PrivateRoute>
+        ),
       },
     ],
   },

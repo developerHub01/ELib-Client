@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { HiBars3BottomRight, HiBars3 } from "react-icons/hi2";
 import { AiFillHome } from "react-icons/ai";
@@ -6,12 +6,14 @@ import { BiSolidBookAdd } from "react-icons/bi";
 import { ImBooks } from "react-icons/im";
 import { FaBookBookmark } from "react-icons/fa6";
 import { BiSolidLogIn, BiSolidLogOut } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import ThemeCompo from "./ThemeCompo";
+import { AuthContext } from "../Context/AuthProvider";
+const animProp = "transition-all duration-100 ease-in-out";
 
 const Sidebar = () => {
   const [sideBarStatus, setSideBarStatus] = useState(false);
-  const animProp = "transition-all duration-100 ease-in-out";
+  const { user, signOutUser } = useContext(AuthContext);
 
   const listIcon = `text-lg md:text-2xl flex-shrink-0`;
   const navItems = [
@@ -22,12 +24,15 @@ const Sidebar = () => {
     },
     {
       text: "All Books",
-      path: "/books",
+      path: "/allbooks",
       icon: <ImBooks className={listIcon} />,
     },
+  ];
+
+  const navItemsPrivate = [
     {
       text: "Borrowed Books",
-      path: "/",
+      path: "/borrowed",
       icon: <FaBookBookmark className={listIcon} />,
     },
     {
@@ -36,25 +41,11 @@ const Sidebar = () => {
       icon: <BiSolidBookAdd className={listIcon} />,
     },
   ];
-
-  const loginLogoutItem = [
-    {
-      text: "Login",
-      path: "/login",
-      icon: <BiSolidLogIn className={listIcon} />,
-    },
-    {
-      text: "Logout",
-      path: "/signup",
-      icon: <BiSolidLogOut className={listIcon} />,
-    },
-  ];
-
   return (
     <div
       className={`${
-        sideBarStatus ? "w-[70px] md:w-[300px]" : "md:w-[80px]"
-      } bg-gray-950 h-screen p-2 select-none flex flex-col justify-between items-center gap-5 overflow-hidden ${animProp} relative z-20 shadow-2xl shadow-black/80`}
+        sideBarStatus ? "w-[70px] md:w-[280px]" : "md:w-[80px]"
+      } flex-shrink-0 flex-grow-0 bg-gray-950 h-screen p-2 select-none flex flex-col justify-between items-center gap-5 overflow-hidden ${animProp} relative z-20 shadow-2xl shadow-black/80`}
     >
       <div className="w-full flex flex-col gap-8">
         <div
@@ -93,7 +84,7 @@ const Sidebar = () => {
         <ul className="w-full flex flex-col gap-2 list-none">
           {navItems.map(({ text, icon, path }) => (
             <li className="w-full" key={text}>
-              <Link
+              <NavLink
                 to={path}
                 className={`w-full flex items-center gap-3 ${
                   sideBarStatus
@@ -107,46 +98,89 @@ const Sidebar = () => {
                     {text}
                   </span>
                 )}
-              </Link>
+              </NavLink>
             </li>
           ))}
+          {user &&
+            navItemsPrivate.map(({ text, icon, path }) => (
+              <li className="w-full" key={text}>
+                <NavLink
+                  to={path}
+                  className={`w-full flex items-center gap-3 ${
+                    sideBarStatus
+                      ? "justify-center md:justify-start"
+                      : "justify-center"
+                  } bg-white/5 hover:bg-white/20 backdrop-blur-sm ${animProp} p-2 rounded-lg text-white overflow-hidden`}
+                >
+                  {icon}
+                  {sideBarStatus && (
+                    <span className="whitespace-nowrap hidden md:block">
+                      {text}
+                    </span>
+                  )}
+                </NavLink>
+              </li>
+            ))}
         </ul>
       </div>
       <ul className="w-full flex flex-col gap-2 list-none">
-        {loginLogoutItem.map(({ text, icon, path }) => (
-          <li className="w-full" key={text}>
+        {user ? (
+          <>
+            <li className="w-full">
+              <button
+                onClick={signOutUser}
+                className={`w-full flex items-center gap-3 ${
+                  sideBarStatus
+                    ? "justify-center md:justify-start"
+                    : "justify-center"
+                } bg-white/5 hover:bg-white/20 backdrop-blur-sm ${animProp} p-2 rounded-lg text-white overflow-hidden`}
+              >
+                <BiSolidLogOut className={listIcon} />
+                {sideBarStatus && (
+                  <span className="whitespace-nowrap hidden md:block">
+                    Logout
+                  </span>
+                )}
+              </button>
+            </li>
+            <li className="w-full" title="profile">
+              <Link
+                to="/"
+                className={`w-full flex items-center gap-3 ${
+                  sideBarStatus ? "justify-start" : "justify-center"
+                } bg-white/5 hover:bg-white/20 backdrop-blur-sm ${animProp} p-2 rounded-lg text-white overflow-hidden`}
+              >
+                <img
+                  src={
+                    user?.photoURL ||
+                    "https://i.ibb.co/3YLrwzH/Photography-and-Videography-Services.jpg"
+                  }
+                  alt=""
+                  className="max-w-[30px] md:max-w-[40px] max-h-[30px] md:max-h-[40px] w-full h-full aspect-square rounded-full object-cover flex-shrink-0"
+                />
+                {sideBarStatus && (
+                  <span className="whitespace-normal w-full text-sm">{user?.email}</span>
+                )}
+              </Link>
+            </li>
+          </>
+        ) : (
+          <li className="w-full">
             <Link
-              to={path}
+              to={"/login"}
               className={`w-full flex items-center gap-3 ${
                 sideBarStatus
                   ? "justify-center md:justify-start"
                   : "justify-center"
               } bg-white/5 hover:bg-white/20 backdrop-blur-sm ${animProp} p-2 rounded-lg text-white overflow-hidden`}
             >
-              {icon}{" "}
+              <BiSolidLogIn className={listIcon} />
               {sideBarStatus && (
-                <span className="whitespace-nowrap hidden md:block">
-                  {text}
-                </span>
+                <span className="whitespace-nowrap hidden md:block">Login</span>
               )}
             </Link>
           </li>
-        ))}
-        <li className="w-full" title="profile">
-          <Link
-            to="/"
-            className={`w-full flex items-center gap-3 ${
-              sideBarStatus ? "justify-start" : "justify-center"
-            } bg-white/5 hover:bg-white/20 backdrop-blur-sm ${animProp} p-2 rounded-lg text-white overflow-hidden`}
-          >
-            <img
-              src="https://i.ibb.co/3YLrwzH/Photography-and-Videography-Services.jpg"
-              alt=""
-              className="max-w-[30px] md:max-w-[40px] max-h-[30px] md:max-h-[40px] w-full h-full aspect-square rounded-full object-cover flex-shrink-0"
-            />
-            {sideBarStatus && <span className="text-sm">abc@gmail.com</span>}
-          </Link>
-        </li>
+        )}
         <li>
           <ThemeCompo />
         </li>

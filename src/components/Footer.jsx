@@ -22,13 +22,15 @@ const socialLinks = [
 
 const Footer = () => {
   return (
-    <section className="bg-gray-950 w-full py-10 relative z-0">
+    <section className="bg-gray-950 w-full py-20 relative z-0">
       <Container>
         <div className="text-white text-center w-full max-w-2xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-white pb-2">
-            ELib
-          </h2>
-          <p className="text-slate-100 pb-4">
+          <Link to="/">
+            <h2 className="text-2xl md:text-3xl font-bold text-white pb-2 select-none">
+              ELib
+            </h2>
+          </Link>
+          <p className="text-gray-100 pb-4">
             Welcome to ELib, where the pages of knowledge come to life. ELib is
             your digital haven for exploring, borrowing, and cherishing an
             extensive collection of books. Whether you're a dedicated reader or

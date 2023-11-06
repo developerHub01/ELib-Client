@@ -1,18 +1,16 @@
 import React from "react";
-import { BsArrowUpRight } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import Rating from "./Rating";
-import { FaUserEdit } from "react-icons/fa";
+import { IoReturnDownBack } from "react-icons/io5";
 const animProp = "transition-all duration-100 ease-in-out";
-const CategoryPageCard = ({ id }) => {
+const BorrowedBookCard = () => {
   return (
     <div className="w-full h-full flex flex-col p-5 bg-gray-950 rounded-xl gap-3 shadow-2xl group">
       <div className="w-full h-full max-h-[300px] rounded-lg overflow-hidden relative">
         <Link
-          to={`/category/${id}`}
+          to={`/`}
           className={`uppercase text-sm border select-none py-1 px-2 bg-white/10 group-hover:bg-white/20 backdrop-blur-sm rounded-full text-white absolute left-2 top-2 ${animProp}`}
         >
-          {id}
+          Sci-Fi & Fantasy
         </Link>
         <img
           src="https://i.ibb.co/TrS1cGX/inaki-del-olmo-NIJu-EQw0-RKg-unsplash.jpg"
@@ -22,7 +20,7 @@ const CategoryPageCard = ({ id }) => {
       </div>
       <div className="w-full flex flex-col gap-2 justify-center items-start text-white">
         <Link
-          to={`/details/${id}`}
+          to={`/`}
           className="w-full flex justify-between items-center gap-2"
         >
           <h3
@@ -30,22 +28,29 @@ const CategoryPageCard = ({ id }) => {
           >
             A People's History of the United States
           </h3>
-          <span
-            className={`text-2xl aspect-square bg-white/5 p-2 rounded-full group-hover:bg-white/20 ${animProp}`}
-          >
-            <BsArrowUpRight />
-          </span>
         </Link>
-        <Rating rating={5} />
-        <div className="flex justify-start items-center rounded-full bg-white/10 p-1 text-white">
-          <span className="text-xl w-10 h-10 rounded-full grid place-items-center bg-white/10 backdrop-blur-sm">
-            <FaUserEdit />
-          </span>
-          <p className="px-2 text-sm capitalize">Name</p>
+        <div className="w-full flex flex-col justify-center items-center gap-3 py-2">
+          <div className="w-full flex justify-between items-center gap-2">
+            <p>Borrowed</p>
+            <p>22 Nov 2023</p>
+          </div>
+          <span className="w-full h-[2px] bg-white/40"></span>
+          <div className="w-full flex justify-between items-center gap-2">
+            <p>Return</p>
+            <p>22 Nov 2023</p>
+          </div>
         </div>
+        <button
+          className={`w-full ${animProp} flex justify-center items-center gap-3 text-white bg-white/20 backdrop-blur-sm hover:bg-white/40 px-5 py-3 rounded-md capitalize`}
+        >
+          Return Book
+          <span className="text-xl">
+            <IoReturnDownBack />
+          </span>
+        </button>
       </div>
     </div>
   );
 };
 
-export default CategoryPageCard;
+export default BorrowedBookCard;
