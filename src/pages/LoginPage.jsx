@@ -7,11 +7,12 @@ import { BiSolidLogIn } from "react-icons/bi";
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { AuthContext } from "../Context/AuthProvider";
+import { toast } from "react-toastify";
 
 const animProp = "transition-all duration-100 ease-in-out";
 
 const LoginPage = () => {
-  const { googleSignIn, setUser } = useContext(AuthContext);
+  const { googleSignIn, setUser, signInUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleGoogleSignIn = () => {
@@ -21,6 +22,18 @@ const LoginPage = () => {
         navigate("/");
       })
       .catch((error) => {});
+  };
+
+  const handleSignIn = ({ email, password }) => {
+    signInUser(email, password)
+      .then((result) => {
+        setUser((prev) => result.user);
+        toast("Login successful");
+        navigate("/");
+      })
+      .catch((error) => {
+        toast(error.message);
+      });
   };
 
   return (
@@ -44,7 +57,7 @@ const LoginPage = () => {
                 password: Yup.string().required("Required"),
               })}
               onSubmit={(values) => {
-                console.log(values);
+                handleSignIn(values);
               }}
             >
               <Form className="w-full flex flex-col gap-5 pt-4">

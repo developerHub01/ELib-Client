@@ -3,15 +3,21 @@ import BookComp from "../components/BookComp";
 import Container from "../components/Container";
 import { AiOutlineGoogle } from "react-icons/ai";
 import { BiSolidLogIn } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { AuthContext } from "../Context/AuthProvider";
+import { toast } from "react-toastify";
+import usePasswordVarification from "../customHooks/usePasswordVarification";
+import * as EmailValidator from "email-validator";
+import { updateProfile } from "firebase/auth";
+import auth from "../firebase/firebase.config";
 
 const animProp = "transition-all duration-100 ease-in-out";
 
 const SignUpPage = () => {
-  const { googleSignIn, setUser } = useContext(AuthContext);
+  const { googleSignIn, setUser, signUpUser } = useContext(AuthContext);
+  const navigate = useNavigate();
   const handleGoogleSignIn = () => {
     googleSignIn()
       .then((result) => {
@@ -19,6 +25,39 @@ const SignUpPage = () => {
         navigate("/");
       })
       .catch((error) => {});
+  };
+  const handleSignUp = (data) => {
+    const { name, profileImg, email, password } = data;
+    console.log(name, profileImg, email, password);
+
+    if (!EmailValidator.validate(email)) {
+      return toast("Email is not valid");
+    }
+
+    if (!usePasswordVarification(password)) {
+      return toast(
+        "Password must contain a uppercase and one special character and minimum length 6"
+      );
+    }
+
+    signUpUser(email, password)
+      .then((userCredential) => {
+        updateProfile(auth.currentUser, {
+          displayName: name,
+          photoURL: profileImg,
+        })
+          .then(() => {
+            toast("Signup successful");
+            setUser((prev) => data);
+            navigate("/");
+          })
+          .catch((error) => {
+            toast(error.message);
+          });
+      })
+      .catch((error) => {
+        toast(error.message);
+      });
   };
   return (
     <section className="py-10 bg-whit dark:bg-gray-900">
@@ -31,24 +70,30 @@ const SignUpPage = () => {
             <Formik
               className="w-full"
               initialValues={{
+                name: "",
                 profileImg: "",
                 email: "",
                 password: "",
               }}
               validationSchema={Yup.object({
+                name: Yup.string().required("Required"),
                 profileImg: Yup.string().required("Required"),
                 email: Yup.string()
                   .email("Invalid email address")
                   .required("Required"),
-                password: Yup.string()
-                  .min(6, "Password atleast 6 characters")
-                  .required("Required"),
+                password: Yup.string().required("Required"),
               })}
               onSubmit={(values) => {
-                console.log(values);
+                handleSignUp(values);
               }}
             >
               <Form className="w-full flex flex-col gap-5 pt-4">
+                <Field
+                  type="text"
+                  placeholder="Name"
+                  name="name"
+                  className="w-full px-4 py-3 bg-white/10 outline-none hover:bg-white/20 active:bg-white/20 focus:bg-white/20 valid:bg-white/20 backdrop-blur-sm rounded-md"
+                />
                 <Field
                   type="text"
                   placeholder="Profile Pic Link"

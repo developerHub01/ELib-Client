@@ -150,16 +150,25 @@ const Sidebar = () => {
                   sideBarStatus ? "justify-start" : "justify-center"
                 } bg-white/5 hover:bg-white/20 backdrop-blur-sm ${animProp} p-2 rounded-lg text-white overflow-hidden`}
               >
-                <img
-                  src={
-                    user?.photoURL ||
-                    "https://i.ibb.co/3YLrwzH/Photography-and-Videography-Services.jpg"
-                  }
-                  alt=""
-                  className="max-w-[30px] md:max-w-[40px] max-h-[30px] md:max-h-[40px] w-full h-full aspect-square rounded-full object-cover flex-shrink-0"
-                />
+                <span
+                  className="max-w-[30px] md:max-w-[40px] max-h-[30px] md:max-h-[40px] w-full h-full aspect-square rounded-full overflow-hidden object-cover flex-shrink-0"
+                  style={{
+                    background: `url('https://i.ibb.co/3YLrwzH/Photography-and-Videography-Services.jpg')`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                  }}
+                >
+                  <img
+                    src={user.photoURL}
+                    alt=""
+                    className="w-full h-full object-cover"
+                  />
+                </span>
                 {sideBarStatus && (
-                  <span className="whitespace-normal w-full text-sm">{user?.email}</span>
+                  <span className="whitespace-normal w-full text-sm">
+                    {user?.email}
+                  </span>
                 )}
               </Link>
             </li>
