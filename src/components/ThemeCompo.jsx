@@ -3,10 +3,6 @@ import { BsFillMoonFill, BsSunFill } from "react-icons/bs";
 
 const ThemeCompo = () => {
   const [themeModeStatus, setThemeModeStatus] = useState(() => {
-    // localStorage.theme === "dark" ||
-    //   (!("theme" in localStorage) &&
-    //     window.matchMedia("(prefers-color-scheme: dark)").matches)
-
     if (localStorage.theme === "dark") {
       document.documentElement.classList.add("dark");
       localStorage.setItem("theme", "dark");
@@ -31,9 +27,9 @@ const ThemeCompo = () => {
     <button
       onClick={handleTheme}
       className={`w-full flex items-center gap-2
-   justify-center bg-white/5 hover:bg-white/20 ${animProp} p-2 rounded-lg text-white overflow-hidden text-2xl`}
+   justify-center bg-white/5 hover:bg-white/20 backdrop-blur-sm ${animProp} p-2 rounded-lg text-white overflow-hidden text-lg md:text-2xl`}
     >
-      {themeModeStatus ? <BsFillMoonFill /> : <BsSunFill />}
+      {themeModeStatus ? <BsSunFill /> : <BsFillMoonFill />}
     </button>
   );
 };

@@ -5,6 +5,9 @@ import ErrorPage from "../pages/ErrorPage";
 import Home from "../pages/Home";
 import BookDetails from "../pages/BookDetails";
 import CategoryPage from "../pages/CategoryPage";
+import LoginPage from "../pages/LoginPage";
+import SignUpPage from "../pages/SignUpPage";
+import AddBookPage from "../pages/AddBookPage";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +18,18 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/login",
+        element: <LoginPage />,
+      },
+      {
+        path: "/signup",
+        element: <SignUpPage />,
+      },
+      {
+        path: "/addbook",
+        element: <AddBookPage />,
       },
       {
         path: "/category/:id",

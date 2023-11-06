@@ -13,45 +13,47 @@ const Sidebar = () => {
   const [sideBarStatus, setSideBarStatus] = useState(false);
   const animProp = "transition-all duration-100 ease-in-out";
 
+  const listIcon = `text-lg md:text-2xl flex-shrink-0`;
   const navItems = [
     {
       text: "Home",
       path: "/",
-      icon: <AiFillHome className="text-2xl flex-shrink-0" />,
+      icon: <AiFillHome className={listIcon} />,
     },
     {
       text: "All Books",
-      path: "/",
-      icon: <ImBooks className="text-2xl flex-shrink-0" />,
+      path: "/books",
+      icon: <ImBooks className={listIcon} />,
     },
     {
       text: "Borrowed Books",
       path: "/",
-      icon: <FaBookBookmark className="text-2xl flex-shrink-0" />,
+      icon: <FaBookBookmark className={listIcon} />,
     },
     {
       text: "Add Books",
-      path: "/",
-      icon: <BiSolidBookAdd className="text-2xl flex-shrink-0" />,
+      path: "/addbook",
+      icon: <BiSolidBookAdd className={listIcon} />,
     },
   ];
+
   const loginLogoutItem = [
     {
       text: "Login",
-      path: "/",
-      icon: <BiSolidLogIn className="text-2xl flex-shrink-0" />,
+      path: "/login",
+      icon: <BiSolidLogIn className={listIcon} />,
     },
     {
       text: "Logout",
-      path: "/",
-      icon: <BiSolidLogOut className="text-2xl flex-shrink-0" />,
+      path: "/signup",
+      icon: <BiSolidLogOut className={listIcon} />,
     },
   ];
 
   return (
     <div
       className={`${
-        sideBarStatus ? "w-[80px] md:w-[300px]" : "md:w-[80px]"
+        sideBarStatus ? "w-[70px] md:w-[300px]" : "md:w-[80px]"
       } bg-gray-950 h-screen p-2 select-none flex flex-col justify-between items-center gap-5 overflow-hidden ${animProp} relative z-20 shadow-2xl shadow-black/80`}
     >
       <div className="w-full flex flex-col gap-8">
@@ -60,8 +62,11 @@ const Sidebar = () => {
             sideBarStatus ? "flex-col-reverse md:flex-row" : "flex-col-reverse"
           } justify-between items-center gap-3`}
         >
-          <div className="flex justify-start items-center gap-3 cursor-pointer overflow-hidden">
-            <span className="w-10 h-10 grid place-items-center bg-white rounded-full text-2xl font-bold flex-shrink-0">
+          <Link
+            to="/"
+            className="flex justify-start items-center gap-3 cursor-pointer overflow-hidden"
+          >
+            <span className="w-8 h-8 md:w-10 md:h-10 grid place-items-center bg-white rounded-full text-xl md:text-2xl font-bold flex-shrink-0">
               EL
             </span>
             <span
@@ -71,23 +76,17 @@ const Sidebar = () => {
             >
               ELib
             </span>
-          </div>
+          </Link>
           <span
-            className="text-white text-4xl cursor-pointer flex-shrink-0"
+            className="text-white text-lg md:text-4xl cursor-pointer flex-shrink-0"
             onClick={() => {
               setSideBarStatus((prev) => !prev);
             }}
           >
             {sideBarStatus ? (
-              <>
-                <HiBars3BottomRight className="hidden md:block" />
-                <HiBars3 className="block md:hidden" />
-              </>
+              <HiBars3BottomRight className="hidden md:block" />
             ) : (
-              <>
-                <HiBars3BottomRight className="hidden" />
-                <HiBars3 className="block" />
-              </>
+              <HiBars3 className="hidden md:block" />
             )}
           </span>
         </div>
@@ -100,7 +99,7 @@ const Sidebar = () => {
                   sideBarStatus
                     ? "justify-center md:justify-start"
                     : "justify-center"
-                } bg-white/5 hover:bg-white/20 ${animProp} p-2 rounded-lg text-white overflow-hidden`}
+                } bg-white/5 hover:bg-white/20 backdrop-blur-sm ${animProp} p-2 rounded-lg text-white overflow-hidden`}
               >
                 {icon}
                 {sideBarStatus && (
@@ -122,7 +121,7 @@ const Sidebar = () => {
                 sideBarStatus
                   ? "justify-center md:justify-start"
                   : "justify-center"
-              } bg-white/5 hover:bg-white/20 ${animProp} p-2 rounded-lg text-white overflow-hidden`}
+              } bg-white/5 hover:bg-white/20 backdrop-blur-sm ${animProp} p-2 rounded-lg text-white overflow-hidden`}
             >
               {icon}{" "}
               {sideBarStatus && (
@@ -138,16 +137,14 @@ const Sidebar = () => {
             to="/"
             className={`w-full flex items-center gap-3 ${
               sideBarStatus ? "justify-start" : "justify-center"
-            } bg-white/5 hover:bg-white/20 ${animProp} p-2 rounded-lg text-white overflow-hidden`}
+            } bg-white/5 hover:bg-white/20 backdrop-blur-sm ${animProp} p-2 rounded-lg text-white overflow-hidden`}
           >
             <img
               src="https://i.ibb.co/3YLrwzH/Photography-and-Videography-Services.jpg"
               alt=""
-              className="max-w-[40px] max-h-[40px] w-full h-full aspect-square rounded-full object-cover flex-shrink-0"
+              className="max-w-[30px] md:max-w-[40px] max-h-[30px] md:max-h-[40px] w-full h-full aspect-square rounded-full object-cover flex-shrink-0"
             />
-            {sideBarStatus && (
-              <span className="text-sm">abc@gmail.com</span>
-            )}
+            {sideBarStatus && <span className="text-sm">abc@gmail.com</span>}
           </Link>
         </li>
         <li>

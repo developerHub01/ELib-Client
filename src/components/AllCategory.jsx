@@ -1,5 +1,6 @@
 import React from "react";
 import Category from "./Category";
+import Container from "./Container";
 
 const categoryList = [
   {
@@ -27,7 +28,7 @@ const categoryList = [
 const AllCategory = () => {
   return (
     <section className="bg-white dark:bg-gray-900 py-12">
-      <div className="w-[90%] max-w-6xl mx-auto flex flex-col gap-5">
+      <Container>
         <h2 className="text-center text-2xl sm:text-4xl font-bold text-gray-950 dark:text-white capitalize pb-5 font-headingFont">
           All Category of Books
         </h2>
@@ -36,7 +37,7 @@ const AllCategory = () => {
             <Category key={item.id} {...item} />
           ))}
         </div>
-      </div>
+      </Container>
     </section>
   );
 };
