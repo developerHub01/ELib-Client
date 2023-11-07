@@ -1,18 +1,17 @@
 import React from "react";
+import Rating from "./Rating";
+import { BiSolidMessageSquareEdit } from "react-icons/bi";
+import { FaUserEdit } from "react-icons/fa";
 import { BsArrowUpRight } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import Rating from "./Rating";
-import { FaUserEdit } from "react-icons/fa";
 const animProp = "transition-all duration-100 ease-in-out";
-const CategoryPageCard = ({
+const AllBooksCard = ({
   _id,
-  bookName,
-  bookImgLink,
-  quantity,
-  author,
   category,
+  bookImgLink,
+  bookName,
   rating,
-  description,
+  author,
 }) => {
   return (
     <div className="w-full h-full flex flex-col p-5 bg-gray-950 rounded-xl gap-3 shadow-2xl group">
@@ -53,12 +52,12 @@ const CategoryPageCard = ({
           <p className="px-2 text-sm capitalize">{author}</p>
         </div>
         <Link
-          to={`/details/${_id}`}
+          to={`/update/book/${_id}`}
           className={`w-full ${animProp} flex justify-center items-center gap-3 text-white bg-white/20 backdrop-blur-sm hover:bg-white/40 px-5 py-3 rounded-md capitalize`}
         >
-          Details
+          Update Book
           <span className="text-xl">
-            <BsArrowUpRight />
+            <BiSolidMessageSquareEdit />
           </span>
         </Link>
       </div>
@@ -66,4 +65,4 @@ const CategoryPageCard = ({
   );
 };
 
-export default CategoryPageCard;
+export default AllBooksCard;

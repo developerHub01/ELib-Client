@@ -4,6 +4,7 @@ export default {
   darkMode: "class",
   theme: {
     fontFamily: {
+      sans: ["Poppins", "sans-serif"],
       headingFont: ["Montserrat Subrayada", "sans-serif"],
       signFont: ["Dancing Script", "cursive"],
     },

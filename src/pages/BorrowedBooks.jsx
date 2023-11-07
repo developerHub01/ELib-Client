@@ -1,8 +1,28 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Container from "../components/Container";
 import BorrowedBookCard from "../components/BorrowedBookCard";
+import LoaderProvider, { LoaderContext } from "../Context/LoaderProvider";
+import axios from "axios";
+import { serverApi } from "../constant/constant";
+import { AuthContext } from "../Context/AuthProvider";
 
 const BorrowedBooks = () => {
+  const [borrowedBooks, setBorrowedBooks] = useState([]);
+  const [updateBorrowList, setUpdateBorrowList] = useState(
+    Math.round(Math.random() * 50)
+  );
+  const { isLoading, setIsLoading } = useContext(LoaderContext);
+  const { user } = useContext(AuthContext);
+  const { email } = user;
+  useEffect(() => {
+    axios
+      .get(`${serverApi}/borrowed/${email}`)
+      .then((res) => {
+        setBorrowedBooks((prev) => res.data);
+        setIsLoading((prev) => false);
+      })
+      .catch((error) => console.log(error.message));
+  }, [isLoading, updateBorrowList]);
   return (
     <section className="py-14 bg-white dark:bg-gray-900">
       <Container>
@@ -12,7 +32,14 @@ const BorrowedBooks = () => {
           </h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <BorrowedBookCard />
+          {!isLoading &&
+            borrowedBooks?.map((item) => (
+              <BorrowedBookCard
+                key={item._id}
+                {...item}
+                setUpdateBorrowList={setUpdateBorrowList}
+              />
+            ))}
         </div>
       </Container>
     </section>

@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import usePasswordVarification from "../customHooks/usePasswordVarification";
 import * as EmailValidator from "email-validator";
 import { updateProfile } from "firebase/auth";
-import auth from "../firebase/firebase.config";
+import auth from "../firebase/config";
 
 const animProp = "transition-all duration-100 ease-in-out";
 

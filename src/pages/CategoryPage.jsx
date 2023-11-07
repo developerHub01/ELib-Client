@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Container from "../components/Container";
 import { useParams } from "react-router-dom";
 import CategoryPageCard from "../components/CategoryPageCard";
-
+import axios from "axios";
+import { serverApi } from "../constant/constant";
 const CategoryPage = () => {
   const { id } = useParams();
+  const [bookList, setBookList] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`${serverApi}/books/${id}`)
+      .then((res) => setBookList((prev) => res.data))
+      .catch((error) => {
+        console.log(error.message);
+      });
+    console.log("=====================");
+  }, []);
   return (
     <>
       <section
@@ -19,10 +30,9 @@ const CategoryPage = () => {
       <section className="w-full py-20 bg-white dark:bg-gray-900">
         <Container>
           <div className="h-full w-full grid grid-cols-1 md:grid-cols-2 gap-4">
-            <CategoryPageCard id={id}/>
-            <CategoryPageCard id={id}/>
-            <CategoryPageCard id={id}/>
-            <CategoryPageCard id={id}/>
+            {bookList.map((item) => (
+              <CategoryPageCard key={item._id} {...item} />
+            ))}
           </div>
         </Container>
       </section>

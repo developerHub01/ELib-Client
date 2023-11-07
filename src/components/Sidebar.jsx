@@ -27,9 +27,6 @@ const Sidebar = () => {
       path: "/allbooks",
       icon: <ImBooks className={listIcon} />,
     },
-  ];
-
-  const navItemsPrivate = [
     {
       text: "Borrowed Books",
       path: "/borrowed",
@@ -101,26 +98,6 @@ const Sidebar = () => {
               </NavLink>
             </li>
           ))}
-          {user &&
-            navItemsPrivate.map(({ text, icon, path }) => (
-              <li className="w-full" key={text}>
-                <NavLink
-                  to={path}
-                  className={`w-full flex items-center gap-3 ${
-                    sideBarStatus
-                      ? "justify-center md:justify-start"
-                      : "justify-center"
-                  } bg-white/5 hover:bg-white/20 backdrop-blur-sm ${animProp} p-2 rounded-lg text-white overflow-hidden`}
-                >
-                  {icon}
-                  {sideBarStatus && (
-                    <span className="whitespace-nowrap hidden md:block">
-                      {text}
-                    </span>
-                  )}
-                </NavLink>
-              </li>
-            ))}
         </ul>
       </div>
       <ul className="w-full flex flex-col gap-2 list-none">

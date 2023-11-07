@@ -9,17 +9,17 @@ const categoryList = [
     imgLink: `https://i.ibb.co/1KHW6qs/history.jpg`,
   },
   {
-    id: "Horror",
+    id: "horror",
     name: "Horror",
     imgLink: `https://i.ibb.co/CHMFcqB/horror.jpg`,
   },
   {
-    id: "Sci-Fi-Fantasy",
+    id: "sci-fi-fantasy",
     name: "Sci-Fi & Fantasy",
     imgLink: `https://i.ibb.co/LZmp3R5/Sci-Fi-Fantasy.jpg`,
   },
   {
-    id: "Science-Math",
+    id: "science-math",
     name: "Science & Math",
     imgLink: `https://i.ibb.co/LZK4r2Z/Science-Math.jpg`,
   },

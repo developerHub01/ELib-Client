@@ -3,7 +3,9 @@ import Container from "../components/Container";
 import BookComp from "../components/BookComp";
 import { BiSolidBookAdd } from "react-icons/bi";
 import { Formik, Field, Form } from "formik";
-import * as Yup from "yup";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { serverApi } from "../constant/constant";
 
 const animProp = "transition-all duration-100 ease-in-out";
 
@@ -49,6 +51,27 @@ const selectBoxData = [
 ];
 
 const AddBookPage = () => {
+  const initialValues = {
+    bookName: "",
+    bookImgLink: "",
+    quantity: "",
+    author: "",
+    category: "history",
+    rating: "",
+    description: "",
+  };
+  const handleAddBooks = (bookData) => {
+    axios
+      .post(`${serverApi}/addbook`, bookData)
+      .then((res) => {
+        if (res.data) {
+          return toast("Added Successfully");
+        } else {
+          return toast("Something went wrong");
+        }
+      })
+      .catch((error) => toast(error.message));
+  };
   return (
     <section className="py-10 bg-whit dark:bg-gray-900">
       <Container mxw="max-w-3xl">
@@ -59,26 +82,10 @@ const AddBookPage = () => {
           <div className="w-full mx-auto flex flex-col gap-5 justify-center items-center">
             <Formik
               className="w-full"
-              initialValues={{
-                bookName: "",
-                bookImgLink: "",
-                quantity: "",
-                author: "",
-                category: "",
-                rating: "",
-                description: "",
-              }}
-              validationSchema={Yup.object({
-                bookName: Yup.string().required("Required"),
-                bookImgLink: Yup.string().required("Required"),
-                quantity: Yup.number().required("Required"),
-                author: Yup.string().required("Required"),
-                category: Yup.string().required("Required"),
-                rating: Yup.number().required("Required"),
-                description: Yup.string().required("Required"),
-              })}
-              onSubmit={(value) => {
-                console.log(value);
+              initialValues={initialValues}
+              onSubmit={(value, { resetForm }) => {
+                handleAddBooks(value);
+                resetForm(initialValues);
               }}
             >
               <Form className="w-full flex flex-col gap-5 pt-4">
@@ -122,6 +129,7 @@ const AddBookPage = () => {
                   className="w-full px-4 py-3 bg-white/10 outline-none hover:bg-white/20 active:bg-white/20 focus:bg-white/20 valid:bg-white/20 backdrop-blur-sm rounded-md min-h-[200px] max-h-52"
                 />
                 <button
+                  type="submit"
                   className={`${animProp} self-center flex justify-center items-center gap-3 text-white bg-white/20 backdrop-blur-sm hover:bg-white/40 px-5 py-3 rounded-md capitalize`}
                 >
                   Add Book
