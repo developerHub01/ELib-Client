@@ -12,6 +12,7 @@ import { serverApi } from "../constant/constant";
 import { LoaderContext } from "../Context/LoaderProvider";
 import { AuthContext } from "../Context/AuthProvider";
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet";
 const animProp = "transition-all duration-100 ease-in-out";
 
 const BookDetails = () => {
@@ -69,6 +70,9 @@ const BookDetails = () => {
 
   return (
     <section className="w-full bg-white dark:bg-gray-900 py-14">
+      <Helmet>
+        <title>Book Details</title>
+      </Helmet>
       {!isLoading && bookDetails && (
         <Container>
           <div className="w-full grid lg:grid-cols-2 gap-5 justify-center items-center">

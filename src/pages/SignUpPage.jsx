@@ -12,6 +12,7 @@ import usePasswordVarification from "../customHooks/usePasswordVarification";
 import * as EmailValidator from "email-validator";
 import { updateProfile } from "firebase/auth";
 import auth from "../firebase/config";
+import { Helmet } from "react-helmet";
 
 const animProp = "transition-all duration-100 ease-in-out";
 
@@ -61,6 +62,9 @@ const SignUpPage = () => {
   };
   return (
     <section className="py-10 bg-whit dark:bg-gray-900">
+      <Helmet>
+        <title>EL Signup</title>
+      </Helmet>
       <Container mxw="max-w-2xl">
         <BookComp>
           <h2 className="text-center text-xl sm:text-4xl font-bold text-white capitalize pb-5 font-headingFont">

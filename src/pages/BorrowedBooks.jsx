@@ -5,6 +5,7 @@ import LoaderProvider, { LoaderContext } from "../Context/LoaderProvider";
 import axios from "axios";
 import { serverApi } from "../constant/constant";
 import { AuthContext } from "../Context/AuthProvider";
+import { Helmet } from "react-helmet";
 
 const BorrowedBooks = () => {
   const [borrowedBooks, setBorrowedBooks] = useState([]);
@@ -25,6 +26,9 @@ const BorrowedBooks = () => {
   }, [isLoading, updateBorrowList]);
   return (
     <section className="py-14 bg-white dark:bg-gray-900">
+      <Helmet>
+        <title>EL Borrowed</title>
+      </Helmet>
       <Container>
         <div>
           <h2 className="text-center text-2xl sm:text-4xl font-bold text-gray-950 dark:text-white capitalize pb-5 font-headingFont">

@@ -5,6 +5,7 @@ import axios from "axios";
 import { serverApi } from "../constant/constant";
 import { AuthContext } from "../Context/AuthProvider";
 import AllBooksCard from "../components/AllBooksCard";
+import { Helmet } from "react-helmet";
 const animProp = "transition-all duration-100 ease-in-out";
 const AllBooks = () => {
   const [filterBgState, setFilterBgState] = useState(true);
@@ -51,6 +52,9 @@ const AllBooks = () => {
 
   return (
     <section className="py-14 bg-white dark:bg-gray-900">
+      <Helmet>
+        <title>ELL Books</title>
+      </Helmet>
       <Container>
         <div className="w-full">
           <h2 className="text-center text-2xl sm:text-4xl font-bold text-gray-950 dark:text-white capitalize pb-5 font-headingFont">

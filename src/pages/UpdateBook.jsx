@@ -8,6 +8,7 @@ import { Field, Formik, Form } from "formik";
 import BookComp from "../components/BookComp";
 import Container from "../components/Container";
 import { BiSolidMessageSquareEdit } from "react-icons/bi";
+import { Helmet } from "react-helmet";
 
 const animProp = "transition-all duration-100 ease-in-out";
 
@@ -80,6 +81,9 @@ const UpdateBook = () => {
   };
   return (
     <section className="py-10 bg-whit dark:bg-gray-900">
+      <Helmet>
+        <title>EL Update</title>
+      </Helmet>
       <Container mxw="max-w-3xl">
         <BookComp>
           <h2 className="text-center text-xl sm:text-4xl font-bold text-white capitalize pb-5 font-headingFont">

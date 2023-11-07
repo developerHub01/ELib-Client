@@ -4,6 +4,7 @@ import { LoaderContext } from "../Context/LoaderProvider";
 import axios from "axios";
 import { serverApi } from "../constant/constant";
 import Container from "../components/Container";
+import { Helmet } from "react-helmet";
 
 const ReadBook = () => {
   const { id } = useParams();
@@ -21,6 +22,9 @@ const ReadBook = () => {
 
   return (
     <section className="w-full bg-white dark:bg-gray-900 py-14">
+      <Helmet>
+        <title>EL Read Books</title>
+      </Helmet>
       <Container>
         <div className="w-full text-gray-100 dark:text-white flex flex-col gap-4">
           <h2 className="text-3xl font-bold">{bookName}</h2>
