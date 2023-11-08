@@ -50,21 +50,21 @@ const AuthProvider = ({ children }) => {
       const loggedUser = { email: userEmail };
       setUser((prev) => currentUser);
       setUserLoading((prev) => false);
-      if (currentUser) {
-        axios
-          .post(`${serverApi}/jwt`, loggedUser, { withCredential: true })
-          .then((res) => {
-            setCookie("token", res.data.token, 1);
-          });
-      } else {
-        axios
-          .post(`${serverApi}/jwt/logout`, loggedUser, {
-            withCredential: true,
-          })
-          .then((res) => {
-            setCookie("token");
-          });
-      }
+      // if (currentUser) {
+      //   axios
+      //     .post(`${serverApi}/jwt`, loggedUser, { withCredential: true })
+      //     .then((res) => {
+      //       setCookie("token", res.data.token, 1);
+      //     });
+      // } else {
+      //   axios
+      //     .post(`${serverApi}/jwt/logout`, loggedUser, {
+      //       withCredential: true,
+      //     })
+      //     .then((res) => {
+      //       setCookie("token");
+      //     });
+      // }
     });
     return () => userStatus();
   }, [userLoading]);

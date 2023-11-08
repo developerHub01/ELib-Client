@@ -15,14 +15,21 @@ const BorrowedBooks = () => {
   const { user } = useContext(AuthContext);
   const { email } = user;
   useEffect(() => {
-    axios
-      .get(`${serverApi}/borrowed/${email}`, { withCredentials: true })
-      .then((res) => {
-        setBorrowedBooks((prev) => res.data);
-        setIsLoading((prev) => false);
-      })
-      .catch((error) => console.log(error.message));
-  }, [isLoading, updateBorrowList]);
+    const loadBorrowBook = async () => {
+      axios
+        .get(`${serverApi}/borrowed/books/${email}`)
+        .then((res) => {
+          setBorrowedBooks((prev) => res.data);
+          console.log(res.data);
+          setIsLoading((prev) => false);
+        })
+        .catch((error) => {
+          console.log(error.message);
+          setIsLoading((prev) => false);
+        });
+    };
+    if (email) loadBorrowBook();
+  }, [isLoading, user, email, updateBorrowList]);
   return (
     <section className="py-14 bg-white dark:bg-gray-900">
       <Container>
@@ -31,17 +38,21 @@ const BorrowedBooks = () => {
             Your Borrowed Books
           </h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {!isLoading &&
-            borrowedBooks.length &&
-            borrowedBooks?.map((item) => (
+        {email && borrowedBooks.length ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {borrowedBooks.map((item) => (
               <BorrowedBookCard
                 key={item._id}
                 {...item}
                 setUpdateBorrowList={setUpdateBorrowList}
               />
             ))}
-        </div>
+          </div>
+        ) : (
+          <h1 className="text-white text-4xl font-bold text-center animate-bounce py-5">
+            {isLoading ? "Loading..." : "No Books Available"}
+          </h1>
+        )}
       </Container>
     </section>
   );

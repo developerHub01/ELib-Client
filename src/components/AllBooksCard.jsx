@@ -28,7 +28,7 @@ const AllBooksCard = ({
           className="w-full h-full object-contain"
         />
       </div>
-      <div className="w-full flex flex-col gap-3 justify-center items-start text-white">
+      <div className="w-full flex flex-col gap-3 justify-center items-start text-white flex-auto">
         <Link
           to={`/details/${_id}`}
           className="w-full flex justify-between items-center gap-2"
@@ -45,7 +45,7 @@ const AllBooksCard = ({
           </span>
         </Link>
         <Rating rating={rating} />
-        <div className="flex justify-start items-center rounded-full bg-white/10 p-1 text-white">
+        <div className="flex justify-start items-center rounded-full bg-white/10 p-1 text-white flex-auto">
           <span className="text-xl w-10 h-10 rounded-full grid place-items-center bg-white/10 backdrop-blur-sm">
             <FaUserEdit />
           </span>

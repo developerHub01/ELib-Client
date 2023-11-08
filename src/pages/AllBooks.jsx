@@ -27,16 +27,16 @@ const AllBooks = () => {
       axios
         .get(`${serverApi}/books`)
         .then((res) => {
+          console.log(res.data);
           setAllBooksData((prev) => res.data);
           setFillteredData((prev) => res.data);
         })
         .catch((error) => {
           console.log(error.message);
-          setIsLoading((prev) => false);
         });
 
       axios
-        .get(`${serverApi}/borrowed/books/${user.email}`)
+        .get(`${serverApi}/borrowed/allbooks/${user.email}`)
         .then((res) => {
           setBorrowedData((prev) => res.data);
           setIsLoading((prev) => false);
@@ -47,7 +47,7 @@ const AllBooks = () => {
         });
     };
     fetchData();
-  }, [isLoading]);
+  }, [isLoading, user]);
 
   return (
     <section className="py-14 bg-white dark:bg-gray-900">
@@ -80,13 +80,17 @@ const AllBooks = () => {
             </button>
           </div>
         </div>
-        <div className="grid md:grid-cols-2 gap-5">
-          {!isLoading &&
-            fillteredData.length &&
-            fillteredData.map((item) => (
+        {fillteredData.length ? (
+          <div className="grid md:grid-cols-2 gap-5">
+            {fillteredData.map((item) => (
               <AllBooksCard key={item._id} {...item} />
             ))}
-        </div>
+          </div>
+        ) : (
+          <h1 className="text-white text-4xl font-bold text-center animate-bounce py-5">
+            {isLoading && allBooksData ? "Loading..." : "No Books Available"}
+          </h1>
+        )}
       </Container>
     </section>
   );
