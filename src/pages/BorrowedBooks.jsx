@@ -1,11 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import Container from "../components/Container";
 import BorrowedBookCard from "../components/BorrowedBookCard";
-import LoaderProvider, { LoaderContext } from "../Context/LoaderProvider";
+import { LoaderContext } from "../Context/LoaderProvider";
 import axios from "axios";
 import { serverApi } from "../constant/constant";
 import { AuthContext } from "../Context/AuthProvider";
-import { Helmet } from "react-helmet";
 
 const BorrowedBooks = () => {
   const [borrowedBooks, setBorrowedBooks] = useState([]);
@@ -17,7 +16,7 @@ const BorrowedBooks = () => {
   const { email } = user;
   useEffect(() => {
     axios
-      .get(`${serverApi}/borrowed/${email}`)
+      .get(`${serverApi}/borrowed/${email}`, { withCredentials: true })
       .then((res) => {
         setBorrowedBooks((prev) => res.data);
         setIsLoading((prev) => false);
@@ -26,9 +25,6 @@ const BorrowedBooks = () => {
   }, [isLoading, updateBorrowList]);
   return (
     <section className="py-14 bg-white dark:bg-gray-900">
-      <Helmet>
-        <title>EL Borrowed</title>
-      </Helmet>
       <Container>
         <div>
           <h2 className="text-center text-2xl sm:text-4xl font-bold text-gray-950 dark:text-white capitalize pb-5 font-headingFont">
@@ -37,6 +33,7 @@ const BorrowedBooks = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {!isLoading &&
+            borrowedBooks.length &&
             borrowedBooks?.map((item) => (
               <BorrowedBookCard
                 key={item._id}

@@ -6,7 +6,6 @@ import { Formik, Field, Form } from "formik";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { serverApi } from "../constant/constant";
-import { Helmet } from "react-helmet";
 const animProp = "transition-all duration-100 ease-in-out";
 
 const inputBoxsData = [
@@ -61,6 +60,7 @@ const AddBookPage = () => {
     description: "",
   };
   const handleAddBooks = (bookData) => {
+    console.log(`${serverApi}/addbook`);
     axios
       .post(`${serverApi}/addbook`, bookData)
       .then((res) => {
@@ -74,9 +74,6 @@ const AddBookPage = () => {
   };
   return (
     <section className="py-10 bg-whit dark:bg-gray-900">
-      <Helmet>
-        <title>Add Books</title>
-      </Helmet>
       <Container mxw="max-w-3xl">
         <BookComp>
           <h2 className="text-center text-xl sm:text-4xl font-bold text-white capitalize pb-5 font-headingFont">
@@ -99,6 +96,7 @@ const AddBookPage = () => {
                       type={inputType}
                       placeholder={placeholder}
                       name={name}
+                      required
                       className="px-4 py-3 bg-white/10 outline-none hover:bg-white/20 active:bg-white/20 focus:bg-white/20 valid:bg-white/20 backdrop-blur-sm rounded-md"
                     />
                   ))}
@@ -106,6 +104,7 @@ const AddBookPage = () => {
                     name="category"
                     as="select"
                     placeholder="Book Category"
+                    required
                     className="px-4 py-3 bg-white/10 outline-none hover:bg-white/20 active:bg-white/20 focus:bg-white/20 valid:bg-white/20 backdrop-blur-sm rounded-md"
                   >
                     {selectBoxData.map(({ name, text }, i) => (
@@ -122,6 +121,7 @@ const AddBookPage = () => {
                     type="number"
                     placeholder="Book Rating"
                     name="rating"
+                    required
                     className="px-4 py-3 bg-white/10 outline-none hover:bg-white/20 active:bg-white/20 focus:bg-white/20 valid:bg-white/20 backdrop-blur-sm rounded-md"
                   />
                 </div>
@@ -129,6 +129,7 @@ const AddBookPage = () => {
                   placeholder="Book Description"
                   name="description"
                   as="textarea"
+                  required
                   className="w-full px-4 py-3 bg-white/10 outline-none hover:bg-white/20 active:bg-white/20 focus:bg-white/20 valid:bg-white/20 backdrop-blur-sm rounded-md min-h-[200px] max-h-52"
                 />
                 <button

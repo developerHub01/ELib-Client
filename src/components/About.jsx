@@ -2,16 +2,6 @@ import React from "react";
 import BookComp from "./BookComp";
 
 const About = () => {
-  const generateShadow = () => {
-    let shadow = "";
-    for (let i = 1; i <= 20; i++) {
-      shadow += `${i}px ${i}px ${
-        i % 2 ? "rgb(156, 163, 175)" : "rgb(17, 24, 39)"
-      }`;
-      if (i < 20) shadow += ", ";
-    }
-    return shadow;
-  };
   return (
     <section className="py-10 w-full bg-white dark:bg-gray-900 select-none">
       <div className="w-[90%] max-w-lg mx-auto cursor-pointer">

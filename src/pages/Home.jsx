@@ -1,16 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import HomeBanner from "../components/HomeBanner/HomeBanner";
 import AllCategory from "../components/AllCategory";
 import Countdown from "../components/Countdown/Countdown";
 import About from "../components/About";
-import { Helmet } from "react-helmet";
+import axios from "axios";
+import { serverApi } from "../constant/constant";
 
 const Home = () => {
+  useEffect(() => {
+    axios
+      .get(`${serverApi}/`)
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <>
-      <Helmet>
-        <title>ELib</title>
-      </Helmet>
       <HomeBanner />
       <About />
       <AllCategory />

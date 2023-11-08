@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import CategoryPageCard from "../components/CategoryPageCard";
 import axios from "axios";
 import { serverApi } from "../constant/constant";
-import { Helmet } from "react-helmet";
 const CategoryPage = () => {
   const { id } = useParams();
   const [bookList, setBookList] = useState([]);
@@ -18,9 +17,6 @@ const CategoryPage = () => {
   }, []);
   return (
     <>
-      <Helmet>
-        <title>EL Category</title>
-      </Helmet>
       <section
         className={`w-full min-h-[40vh] py-10 bg-[url('https://i.ibb.co/TrS1cGX/inaki-del-olmo-NIJu-EQw0-RKg-unsplash.jpg')] bg-cover bg-center bg-no-repeat relative before:content-['*'] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-gray-950/70 grid place-items-center`}
       >
