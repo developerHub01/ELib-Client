@@ -1,1 +1,1 @@
-export const serverApi = "http://localhost:5000";
+export const serverApi = "https://elib-server-api.vercel.app";

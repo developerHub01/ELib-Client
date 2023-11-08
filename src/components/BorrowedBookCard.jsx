@@ -122,7 +122,7 @@ const BorrowedBookCard = ({
           </div>
         </div>
       ) : (
-        <h1 className="text-white text-4xl font-bold text-center animate-bounce">
+        <h1 className="text-gray-950 dark:text-white text-4xl font-bold text-center animate-bounce py-5">
           {isLoading ? "Loading..." : "No Books Available"}
         </h1>
       )}

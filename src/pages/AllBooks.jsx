@@ -58,10 +58,10 @@ const AllBooks = () => {
           </h2>
           {filterBgState}
           <div
-            className={`w-72 bg-white/10 flex relative rounded-md overflow-hidden mx-auto`}
+            className={`w-72 bg-gray-900 dark:bg-white/10 flex relative rounded-md overflow-hidden mx-auto`}
           >
             <span
-              className={`absolute w-1/2 h-full bg-white/50 backdrop-blur-sm ${animProp} z-0`}
+              className={`absolute w-1/2 h-full bg-gray-950 dark:bg-white/50 backdrop-blur-sm ${animProp} z-0`}
               style={{
                 left: filterBgState ? "0" : "50%",
               }}
@@ -87,7 +87,7 @@ const AllBooks = () => {
             ))}
           </div>
         ) : (
-          <h1 className="text-white text-4xl font-bold text-center animate-bounce py-5">
+          <h1 className="text-gray-950 dark:text-white text-4xl font-bold text-center animate-bounce py-5">
             {isLoading && allBooksData ? "Loading..." : "No Books Available"}
           </h1>
         )}

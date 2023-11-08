@@ -49,7 +49,7 @@ const BorrowedBooks = () => {
             ))}
           </div>
         ) : (
-          <h1 className="text-white text-4xl font-bold text-center animate-bounce py-5">
+          <h1 className="text-gray-950 dark:text-white text-4xl font-bold text-center animate-bounce py-5">
             {isLoading ? "Loading..." : "No Books Available"}
           </h1>
         )}

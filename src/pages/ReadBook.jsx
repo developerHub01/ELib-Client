@@ -22,7 +22,7 @@ const ReadBook = () => {
   return (
     <section className="w-full bg-white dark:bg-gray-900 py-14">
       <Container>
-        <div className="w-full text-gray-500 dark:text-white flex flex-col gap-4">
+        <div className="w-full text-gray-700 dark:text-white flex flex-col gap-4">
           <h2 className="text-3xl font-bold">{bookName}</h2>
           <p className="leading-relaxed">{description}</p>
         </div>
